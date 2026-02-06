@@ -9,10 +9,19 @@ if not check_logged_in():
 ids = get_course_ids(get_course_list(), COURSE_NAMES)
 
 print(now())
+
 ratelimit = 0
 interval = MIN_RATE
+loop_counter = 0
 
 while ids:
+    if loop_counter >= 60:
+        loop_counter = 0
+        if not check_logged_in():
+            login()
+    else:
+        loop_counter+=1
+    
     seconds_to_open = (OPEN_TIME - now()).total_seconds()
 
     if ratelimit <= 0:
