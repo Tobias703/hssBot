@@ -1,8 +1,12 @@
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 from config import *
+import random
+import time
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 def enroll(course_id: int, headless=True):
-    url = ENROLlMENT_URL.format(course_id=course_id)
+    url = ENROLLMENT_URL.format(course_id=course_id)
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=headless)
@@ -35,3 +39,23 @@ def enroll(course_id: int, headless=True):
         print("Enrolled to course: ", course_id)
 
         return html
+
+def now():
+    return datetime.now(ZoneInfo("Europe/Berlin"))
+
+def sleep_with_jitter(base):
+    jitter = random.uniform(-0.15, 0.15) * base
+    time.sleep(max(0.01, base + jitter))
+    
+def compute_interval(seconds_to_open):
+    """
+    Smooth ramp:
+    - >30 min: very slow
+    - 30-1 min: medium
+    - <1 min: aggressive
+    """
+    if seconds_to_open > 1800:
+        return MIN_RATE
+    if seconds_to_open > 60:
+        return MED_RATE
+    return MAX_RATE
