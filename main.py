@@ -11,7 +11,7 @@ ids = get_course_ids(get_course_list(), COURSE_NAMES)
 print(now())
 
 ratelimit = 0
-interval = MIN_RATE
+interval = MAX_RATE
 loop_counter = 0
 
 while ids:
@@ -28,7 +28,7 @@ while ids:
         if seconds_to_open > 0:
             interval = compute_interval(seconds_to_open)
         else:
-            interval = MIN_RATE
+            interval = MAX_RATE
 
     try:
         for enrollable in check_enrollable(ids):
