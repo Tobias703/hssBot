@@ -103,3 +103,21 @@ def check_enrollable(ids):
             print(f"Course {cid} not found in enrollment check!")
 
     return enrollable
+
+def getMetadata(ids):
+    data = get_course_list()
+
+    metadata = []
+    ids_set = set(ids)
+
+    for c in data:
+        cid = c.get("CourseID")
+        if cid in ids_set:
+            metadata.append(c)
+
+    if not metadata:
+        missing = ids_set - {c.get("CourseID") for c in data}
+        for cid in missing:
+            print(f"Course {cid} not found in metadata check!")
+
+    return metadata
