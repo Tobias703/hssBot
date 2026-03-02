@@ -23,7 +23,7 @@ def enroll(course_id: int, headless=True):
             exists = page.evaluate("""
                 () => !!document.querySelector("input[type=submit]")
                 """)
-            print("Submit button exists:", exists)
+            print(f"Submit button exists: {exists}")
             page.screenshot(path="debug_no_button.png", full_page=True)
             raise RuntimeError("Booking button not found (not logged in or course not bookable)")
 
@@ -36,7 +36,7 @@ def enroll(course_id: int, headless=True):
 
         browser.close()
         
-        print("Enrolled to course: ", course_id)
+        print(f"Enrolled to course: {course_id}")
 
         return html
 

@@ -3,6 +3,7 @@ from playwright.sync_api import sync_playwright
 from config import *
 import json
 import sys
+from pathlib import Path
 
 def login():
     with sync_playwright() as p:
@@ -16,11 +17,13 @@ def login():
         input("Press ENTER after you see the KursListe page...")
 
         context.storage_state(path=AUTH_STATE)
-        print("Saved auth state to ", AUTH_STATE)
+        print(f"Saved auth state to {AUTH_STATE}")
 
         browser.close()
 
 def check_logged_in():
+    if not Path(AUTH_STATE).exists():
+        return 0
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(storage_state=AUTH_STATE)
@@ -29,7 +32,7 @@ def check_logged_in():
         try:
             print(response.text())
         except Exception as e:
-            print("Failed to read response body:", e)
+            print(f"Failed to read response body: {e}")
             
         response_data = json.loads(response.text())
         if response_data["isLoggedIn"] == False:
