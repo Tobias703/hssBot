@@ -17,4 +17,4 @@ DEBUG = False
 
 COURSE_NAMES = [""]
 COURSE_IDS = []
-OPEN_TIME = datetime(2026, 2, 6, 19, 39, 0, tzinfo=ZoneInfo("Europe/Berlin")) # Year, Month, Day, Hour, Minute, Second
+OPEN_TIME = datetime(2026, 3, 11, 9, 0, 0, tzinfo=ZoneInfo("Europe/Berlin")) # Year, Month, Day, Hour, Minute, Second

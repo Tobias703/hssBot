@@ -13,9 +13,10 @@ courses = get_course_list()
 ids = COURSE_IDS
 
 if DEBUG:
-    print(now())
     print(courses)
     print(getMetadata(ids))
+    
+print(now())
 
 ratelimit = 0
 interval = MAX_RATE
