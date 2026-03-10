@@ -9,7 +9,7 @@ def enroll(course_id: int, headless=True):
     url = ENROLLMENT_URL.format(course_id=course_id)
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=headless)
+        browser = p.firefox.launch(headless=headless)
         context = browser.new_context(storage_state=AUTH_STATE)
         page = context.new_page()
 

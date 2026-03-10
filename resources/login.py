@@ -6,7 +6,7 @@ from pathlib import Path
 
 def login():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.firefox.launch(headless=False)
         context = browser.new_context()
         page = context.new_page()
 
@@ -24,7 +24,7 @@ def check_logged_in():
     if not Path(AUTH_STATE).exists():
         return 0
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.firefox.launch(headless=True)
         context = browser.new_context(storage_state=AUTH_STATE)
         response = context.request.get(IS_LOGGED_IN_URL)
 

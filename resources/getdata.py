@@ -31,7 +31,7 @@ def clean_status(raw: str) -> str:
 
 def get_course_list(debug = 0):
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.firefox.launch(headless=True)
         context = browser.new_context(storage_state=AUTH_STATE)
 
         response = context.request.get(KURSLISTE_URL)
