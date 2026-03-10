@@ -50,12 +50,12 @@ def sleep_with_jitter(base):
 def compute_interval(seconds_to_open):
     """
     Smooth ramp:
-    - >30 min: very slow
-    - 30-1 min: medium
-    - <1 min: aggressive
+    - >3 min: very slow (10 sec)
+    - 3min-10sec: medium (1 sec)
+    - <10 sec: aggressive (0.15 sec)
     """
-    if seconds_to_open > 1800:
+    if seconds_to_open > 180:
         return MIN_RATE
-    if seconds_to_open > 60:
+    if seconds_to_open > 10:
         return MED_RATE
     return MAX_RATE
