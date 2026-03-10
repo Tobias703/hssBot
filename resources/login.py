@@ -2,7 +2,6 @@
 from playwright.sync_api import sync_playwright
 from config import *
 import json
-import sys
 from pathlib import Path
 
 def login():

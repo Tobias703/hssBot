@@ -2,7 +2,6 @@ from resources.login import login, check_logged_in
 from resources.getdata import get_course_list, get_course_ids, check_enrollable, getMetadata
 from resources.enroll import enroll, sleep_with_jitter, now, compute_interval
 from config import *
-import time
 
 if not check_logged_in():
     login()
